@@ -1,0 +1,36 @@
+.message {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    color: white;
+    max-width: 45%;
+}
+
+.message__info {
+    margin-left: 20px;
+    padding: 2px;
+    border: 1px solid rgb(70, 67, 67);
+    border-radius: 10px;
+}
+
+.message__timestamp {
+    color: gray;
+    float: right;
+    margin-left: 20px;
+    margin-right: 3px;
+    font-size: x-small;
+}
+
+.message__info > h4 {
+    font-size: 13px;
+    margin-left: 2px;
+}
+
+.message__info > h6 {
+    margin: 4px;
+    font-weight: 200;
+}
+
+.spec {
+    border: 1px solid #4fb185;
+}
