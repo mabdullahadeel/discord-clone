@@ -9,7 +9,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import SendIcon from '@material-ui/icons/Send';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
-function ChatHeader({ channelName }) {
+function ChatHeader({ channelName, email }) {
     return (
         <div className="chatHeader">
             <div className="chatHeader__left">
@@ -19,6 +19,9 @@ function ChatHeader({ channelName }) {
                         </span>
                     {channelName}
                 </h3>
+                <div className="chatHeader__emailStatus">
+                    <p>{email}</p>
+                </div>
             </div>
             <div className="chatHeader__right">
                 <NotificationsIcon />

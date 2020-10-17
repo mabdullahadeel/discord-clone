@@ -12,30 +12,33 @@ function Message({ timestamp, user, message }) {
     const currUser = useSelector(selectUser);
 
     return (
-        <div className={`message ${currUser.uid === user.uid && "ml-auto"}`}>
+        <>
             {currUser.uid === user.uid ?
-                <>
-                    <div className="message__info spec">
-                        <h4>{user.dispalayName}
-                            <span className="message__timestamp"><TimeAgo date={new Date(timestamp?.toDate()).toUTCString()} /></span>
-                        </h4>
-                        <h6>{message}</h6>
+                <div className="bubbleWrapper">
+                    <div className="inlineContainer own">
+                        <Avatar src={user.photo} alt={currUser.dispalayName} />
+                        <div className="ownBubble own">
+                            {message}
+                        </div>
                     </div>
-                    <Avatar src={user.photo} className="ml-4" />
-                </>
+                    <span className="own">
+                        <TimeAgo date={new Date(timestamp?.toDate()).toUTCString()} />
+                    </span>
+                </div>
                 :
-                <>
-                    <Avatar src={user.photo} />
-                    <div className="message__info">
-                        <h4>{user.dispalayName}
-                            <span className="message__timestamp"><TimeAgo date={new Date(timestamp?.toDate()).toUTCString()} /></span>
-                        </h4>
-                        <h6>{message}</h6>
+                <div className="bubbleWrapper">
+                    <div className="inlineContainer">
+                        <Avatar src={user.photo} alt={user.dispalayName} />
+                        <div className="otherBubble other">
+                            {message}
+                        </div>
                     </div>
-                </>
+                    <span className="other">
+                        <TimeAgo date={new Date(timestamp?.toDate()).toUTCString()} />
+                    </span>
+                </div>
             }
-
-        </div>
+        </>
     )
 }
 

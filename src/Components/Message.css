@@ -1,36 +1,47 @@
-.message {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    color: white;
-    max-width: 45%;
+/* Taken CSS */
+.bubbleWrapper {
+	padding: 10px 10px;
+	display: flex;
+	justify-content: flex-end;
+	flex-direction: column;
+	align-self: flex-end;
+    color: #fff;
 }
-
-.message__info {
-    margin-left: 20px;
-    padding: 2px;
-    border: 1px solid rgb(70, 67, 67);
-    border-radius: 10px;
+.inlineContainer {
+    display: inline-flex;
 }
-
-.message__timestamp {
-    color: gray;
-    float: right;
-    margin-left: 20px;
-    margin-right: 3px;
-    font-size: x-small;
+.inlineContainer.own {
+    flex-direction: row-reverse;
 }
-
-.message__info > h4 {
-    font-size: 13px;
-    margin-left: 2px;
+.inlineIcon {
+    width:20px;
+    object-fit: contain;
 }
-
-.message__info > h6 {
-    margin: 4px;
-    font-weight: 200;
+.ownBubble {
+	min-width: 60px;
+	max-width: 700px;
+	padding: 14px 18px;
+    margin: 6px 8px;
+	background-color: #5b5377;
+	border-radius: 16px 16px 0 16px;
+	border: 1px solid #443f56;
 }
-
-.spec {
-    border: 1px solid #4fb185;
+.otherBubble {
+	min-width: 60px;
+	max-width: 700px;
+	padding: 14px 18px;
+    margin: 6px 8px;
+	background-color: #6C8EA4;
+	border-radius: 16px 16px 16px 0;
+	border: 1px solid #54788e;
+}
+.own {
+	align-self: flex-end;
+}
+.other {
+	align-self: flex-start;
+}
+span.own, span.other{
+    font-size: 14px;
+    color: grey;
 }

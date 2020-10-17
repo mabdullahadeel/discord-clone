@@ -58,3 +58,39 @@
 .chat__input > .MuiSvgIcon-root {
     font-size: 40px;
 }
+
+.chat__loadMore {
+    color: white !important;
+    width: 200px;
+    left: 45% !important;
+}
+
+/* // Emoji Play */
+.emoji {
+    font-size: 2rem;
+    transform: scale(1);
+    text-shadow: 0 2px 4px rgba(0,0,0,.3);
+    transition: 
+    text-shadow .2s ease-in-out,
+    transform .2s ease-in-out;
+}
+
+.emoji:hover {
+    transform: scale(1) translatey(-20px);
+    text-shadow: 0 20px 20px rgba(0,0,0,.3);
+}
+
+.emoji--happy:before {
+    cursor: pointer;
+    content: '🙂';
+}
+
+.emoji--happy:hover:before {
+    content: '😄';
+}
+
+.chat__emojiPicker {
+    position: absolute;
+    left: 26%;
+    bottom: 11%;
+}

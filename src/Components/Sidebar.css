@@ -22,12 +22,34 @@
 
 .sidebar__channels {
     flex: 1;
+    overflow-y: scroll;
+}
+
+/* Custom Scroll Bar */
+/* width */
+.sidebar__channels::-webkit-scrollbar {
+    width: 10px;
+}
+  /* Track */
+.sidebar__channels::-webkit-scrollbar-track {
+    background: #2f3135; 
+}
+/* Handle */
+.sidebar__channels::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+  /* Handle on hover */
+.sidebar__channels::-webkit-scrollbar-thumb:hover {
+    background: #555; 
 }
 
 .sidebar__addChannel {
     cursor: pointer;
 }
 
+.sidebar__addChannel {
+    color: gray !important;
+}
 .sidebar__addChannel:hover {
     color: white;
 }
@@ -88,4 +110,8 @@
 
 .sidebar__profileIcons > .MuiSvgIcon-root {
     padding: 10px;
+}
+
+.sidebar__modalButton {
+    background-color: #4fb185;
 }

@@ -1,9 +1,15 @@
+.sidebarChannel{
+    border-bottom: 1px solid #4fb185;
+    border-top: 1px solid #4fb185;
+}
+
 .sidebarChannel:hover > h4 {
     color: white;
     background-color: #40464b;
 }
 
 .sidebarChannel > h4 {
+    margin-bottom: 0;
     display: flex;
     padding-left: 15px;
     align-items: center;
@@ -13,6 +19,18 @@
 }
 
 .sidebarChannel__hash {
+    margin: 5px;
+    display: flex;
+    align-items: center;
     font-size: 30px;
     padding: 8px;
+}
+
+.sidebarChannel--active > h4 {
+    color: white;
+    background-color: #40464b;
+}
+
+.avatar {
+    margin-right: 10px;
 }
