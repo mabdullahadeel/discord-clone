@@ -1,0 +1,59 @@
+.soundRecorder {
+    position: sticky;
+    right: 1%;
+    bottom: 11%;
+    background-color: #2f3135;
+}
+
+.soundRecorder__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.soundRecorder__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MUIbuttons {
+    margin: 10px !important;
+    border: none !important;
+    outline: none !important;
+}
+
+.recocrdButton {
+    background-color: rgb(67, 156, 64) !important;
+    color: white !important;
+}
+
+.deleteButton {
+    color: rgb(221, 89, 89) !important;
+    border: 1px solid red !important;
+
+}
+
+.deleteButton:hover {
+    color: red !important;
+    box-shadow: 1px 1px 1px 0px rgb(231, 120, 120);
+}
+
+.stopButton {
+    background-color: red !important;
+    color: white !important;
+}
+
+.playButton {
+    background-color: rgb(90, 86, 86) !important;
+}
+
+.disableRecord {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.soundRecorder__closeIcon{
+    color: white !important;
+}

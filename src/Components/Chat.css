@@ -94,3 +94,38 @@
     left: 26%;
     bottom: 11%;
 }
+
+.dummyEmoji {
+    font-size: 2rem;
+    cursor: not-allowed;
+}
+
+.chat__mic:hover {
+    cursor: pointer;
+}
+
+.chat__mic{
+    border-radius: 20px;
+    color: white !important;
+}
+
+.chat__mic:hover{
+    color: #2c66ad !important;
+}
+
+.chat__mic--active{
+    animation-name: color_change ;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+@keyframes color_change {
+	from { background-color: rgb(67, 116, 180) }
+	to { background-color: rgb(195, 83, 83) }
+}
+
+.chat__MicButton {
+    border: none !important;
+    outline: none !important;
+}

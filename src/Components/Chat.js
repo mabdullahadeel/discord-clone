@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react'
 import './Chat.css';
 import ChatHeader from './ChatHeader';
 import Message from './Message';
+import SoundRecorder from './SoundRecorder';
 import firebase from 'firebase';
 
 // Mui Icons
+import { IconButton } from '@material-ui/core'
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import SendIcon from '@material-ui/icons/Send';
 import ReplayIcon from '@material-ui/icons/Replay';
 import Button from '@material-ui/core/Button';
+import MicNoneIcon from '@material-ui/icons/MicNone';
+import MicIcon from '@material-ui/icons/Mic';
 // React Flip Move
 import FlipMove from 'react-flip-move';
 // Emoji Picker
@@ -18,6 +22,7 @@ import { selectUser } from '../features/userSlice';
 import { selectChannelId, seletChannelName } from '../features/appSlice';
 import { useSelector } from 'react-redux';
 import db from '../firebase/firebase';
+
 
 function Chat() {
     const user = useSelector(selectUser);
@@ -121,9 +126,7 @@ function Chat() {
     // Emoji handling
     const [isEmojiOpen, setIsEmoijOpen] = useState(false);
     const toggleEmoji = () => {
-        if (channelId) {
-            setIsEmoijOpen(!isEmojiOpen)
-        };
+        setIsEmoijOpen(!isEmojiOpen)
     }
     if (isEmojiOpen) {
         document.onkeydown = function (evt) {
@@ -134,8 +137,13 @@ function Chat() {
         };
     }
     const onEmojiClick = (event, emojiObject) => {
-        setInput(input + emojiObject.emoji)
+        if (!isVoiceRecorder) {
+            setInput(input + emojiObject.emoji)
+        }
     }
+
+    // Voice Recorder
+    const [isVoiceRecorder, setIsVoiceRecorder] = useState(false)
 
     return (
         <div className='chat'>
@@ -169,25 +177,42 @@ function Chat() {
             </div>
             <div className="chat__input">
                 <AddCircleIcon />
-                <span className="emoji emoji--happy" onClick={toggleEmoji}></span>
+                {(channelId && !isVoiceRecorder) ?
+                    <span className="emoji emoji--happy" onClick={toggleEmoji}></span>
+                    :
+                    <span className="dummyEmoji">🙂</span>
+                }
                 <form >
                     <input
                         value={input}
-                        onChange={(e) => setInput(e.target.value)}
+                        onChange={(e) => {
+                            setInput(e.target.value)
+                            setIsVoiceRecorder(false)
+                        }}
                         placeholder={`Message #${channelCresientials ? channelCresientials.dispalayName : ' | Select a channel to send message....'}`}
-                        disabled={!channelId}
+                        disabled={!channelId || isVoiceRecorder}
                     />
                     <button onClick={sendMessage} className="chat__inputButton" type="submit">Hidden Send Message</button>
                 </form>
+                {(isVoiceRecorder && !input) &&
+                    <SoundRecorder setIsVoiceRecorder={setIsVoiceRecorder} className="chat__Recorder" />
+                }
                 <div className="chat__inputIcons" onClick={sendMessage}>
-                    <Button
-                        disabled={!channelId || !input}
-                        variant="contained"
-                        color="primary"
-                        endIcon={<SendIcon>send</SendIcon>}
-                    >
-                        Send
+                    {!isVoiceRecorder &&
+                        <Button
+                            disabled={!channelId || !input}
+                            variant="contained"
+                            color="primary"
+                            endIcon={<SendIcon>send</SendIcon>}
+                        >
+                            Send
                     </Button>
+                    }
+                    {(!input && channelId) &&
+                        <IconButton className="chat__MicButton">
+                            <MicNoneIcon className={`chat__mic ${isVoiceRecorder && "chat__mic--active"}`} fontSize="large" onClick={() => setIsVoiceRecorder(!isVoiceRecorder)} />
+                        </IconButton>
+                    }
                 </div>
                 {isEmojiOpen &&
                     <div className="chat__emojiPicker" id="clickbox">
@@ -201,4 +226,4 @@ function Chat() {
     )
 }
 
-export default Chat
+export default Chat;
