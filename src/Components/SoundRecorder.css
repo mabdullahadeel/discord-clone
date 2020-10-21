@@ -57,3 +57,19 @@
 .soundRecorder__closeIcon{
     color: white !important;
 }
+
+.progressBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.progressBar > p {
+    color: red;
+}
+
+.progressbar__container{
+    width: 50%;
+}

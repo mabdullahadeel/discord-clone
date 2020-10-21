@@ -16,13 +16,13 @@ function SidebarChannel({ id, channelCredientials }) {
     const conversationInfo = useSelector(seletChannelName);
     const [userStatus, setUserStatus] = useState('offline');
 
-    // useEffect(() => {
-    //     db.collection('users').where('uid', '==', channelCredientials.uid).onSnapshot((snapshot) =>
-    //         (snapshot.docs.map((doc) => (
-    //             setUserStatus(doc.data().status)
-    //         )))
-    //     )
-    // }, [])
+    useEffect(() => {
+        db.collection('users').where('uid', '==', channelCredientials.uid).onSnapshot((snapshot) =>
+            (snapshot.docs.map((doc) => (
+                setUserStatus(doc.data().status)
+            )))
+        )
+    }, [])
 
     return (
         <div className={`sidebarChannel ${conversationInfo && (channelCredientials.uid === conversationInfo.uid && "sidebarChannel--active")}`} onClick={() => dispatch(setChannelInfo({

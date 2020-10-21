@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Chat.css';
 import ChatHeader from './ChatHeader';
 import Message from './Message';
+import DropZone from './DropZone';
 import SoundRecorder from './SoundRecorder';
 import firebase from 'firebase';
 
@@ -12,7 +13,6 @@ import SendIcon from '@material-ui/icons/Send';
 import ReplayIcon from '@material-ui/icons/Replay';
 import Button from '@material-ui/core/Button';
 import MicNoneIcon from '@material-ui/icons/MicNone';
-import MicIcon from '@material-ui/icons/Mic';
 // React Flip Move
 import FlipMove from 'react-flip-move';
 // Emoji Picker
@@ -143,7 +143,9 @@ function Chat() {
     }
 
     // Voice Recorder
-    const [isVoiceRecorder, setIsVoiceRecorder] = useState(false)
+    const [isVoiceRecorder, setIsVoiceRecorder] = useState(false);
+    // DropZone
+    const [isDropZoneOpen, setIsDropZoneOpen] = useState(false);
 
     return (
         <div className='chat'>
@@ -176,30 +178,42 @@ function Chat() {
                 <div id="message-box"></div>
             </div>
             <div className="chat__input">
-                <AddCircleIcon />
-                {(channelId && !isVoiceRecorder) ?
-                    <span className="emoji emoji--happy" onClick={toggleEmoji}></span>
+                <div className="chatInput__leftIcons">
+                    <AddCircleIcon className="chat__attatchFile" onClick={() => {
+                        if (channelId) {
+                            setIsDropZoneOpen(!isDropZoneOpen);
+                            setIsVoiceRecorder(false);
+                        }
+                    }} />
+                    {(channelId && !isVoiceRecorder && !isDropZoneOpen) ?
+                        <span className="emoji emoji--happy" onClick={toggleEmoji}></span>
+                        :
+                        <span className="dummyEmoji">🙂</span>
+                    }
+                </div>
+                {!isDropZoneOpen ?
+                    <form >
+                        <input
+                            value={input}
+                            onChange={(e) => {
+                                setInput(e.target.value)
+                                setIsVoiceRecorder(false)
+                            }}
+                            placeholder={`Message #${channelCresientials ? channelCresientials.dispalayName : ' | Select a channel to send message....'}`}
+                            disabled={!channelId || isVoiceRecorder}
+                        />
+                        <button onClick={sendMessage} className="chat__inputButton" type="submit">Hidden Send Message</button>
+                    </form>
                     :
-                    <span className="dummyEmoji">🙂</span>
+                    <DropZone isDropZoneOpen={isDropZoneOpen} setIsDropZoneOpen={setIsDropZoneOpen} />
                 }
-                <form >
-                    <input
-                        value={input}
-                        onChange={(e) => {
-                            setInput(e.target.value)
-                            setIsVoiceRecorder(false)
-                        }}
-                        placeholder={`Message #${channelCresientials ? channelCresientials.dispalayName : ' | Select a channel to send message....'}`}
-                        disabled={!channelId || isVoiceRecorder}
-                    />
-                    <button onClick={sendMessage} className="chat__inputButton" type="submit">Hidden Send Message</button>
-                </form>
                 {(isVoiceRecorder && !input) &&
-                    <SoundRecorder setIsVoiceRecorder={setIsVoiceRecorder} className="chat__Recorder" />
+                    <SoundRecorder setIsVoiceRecorder={setIsVoiceRecorder} isVoiceRecorder={isVoiceRecorder} className="chat__Recorder" />
                 }
-                <div className="chat__inputIcons" onClick={sendMessage}>
-                    {!isVoiceRecorder &&
+                <div className="chat__inputIcons">
+                    {(!isVoiceRecorder && !isDropZoneOpen) &&
                         <Button
+                            onClick={sendMessage}
                             disabled={!channelId || !input}
                             variant="contained"
                             color="primary"
@@ -209,8 +223,13 @@ function Chat() {
                     </Button>
                     }
                     {(!input && channelId) &&
-                        <IconButton className="chat__MicButton">
-                            <MicNoneIcon className={`chat__mic ${isVoiceRecorder && "chat__mic--active"}`} fontSize="large" onClick={() => setIsVoiceRecorder(!isVoiceRecorder)} />
+                        <IconButton className="chat__MicButton"
+                            onClick={() => {
+                                setIsVoiceRecorder(!isVoiceRecorder);
+                                setIsDropZoneOpen(false);
+                            }}
+                        >
+                            <MicNoneIcon className={`chat__mic ${isVoiceRecorder && "chat__mic--active"}`} fontSize="large" />
                         </IconButton>
                     }
                 </div>

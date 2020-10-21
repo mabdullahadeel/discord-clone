@@ -45,3 +45,8 @@ span.own, span.other{
     font-size: 14px;
     color: grey;
 }
+
+.message__image{
+	height: 350px;
+	object-fit: contain;
+}

@@ -122,9 +122,8 @@ function Sidebar() {
                         <div className="sidebar__header">
                             <h1>Chats</h1>
                         </div>
-                        <IconButton >
+                        <IconButton onClick={toggle}>
                             <AddIcon className="sidebar__addChannel"
-                                onClick={toggle}
                             />
                         </IconButton>
                     </div>

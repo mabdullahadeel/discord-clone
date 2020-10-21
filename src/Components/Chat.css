@@ -55,7 +55,7 @@
     display: none;
 }
 
-.chat__input > .MuiSvgIcon-root {
+.chatInput__leftIcons > .MuiSvgIcon-root {
     font-size: 40px;
 }
 
@@ -128,4 +128,13 @@
 .chat__MicButton {
     border: none !important;
     outline: none !important;
+}
+
+.chat__attatchFile:hover {
+    cursor: pointer;
+    color: white;
+}
+.chatInput__leftIcons {
+    display: flex;
+    align-items: center;
 }
