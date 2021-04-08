@@ -49,7 +49,6 @@ function SoundRecorder({ setIsVoiceRecorder, isVoiceRecorder }) {
     // }
 
     const onStop = (recordedBlob) => {
-        console.log('recordedBlob is: ', recordedBlob);
         setData(recordedBlob)
         // Custom Functions
     }
@@ -64,7 +63,6 @@ function SoundRecorder({ setIsVoiceRecorder, isVoiceRecorder }) {
     }
 
     const sendAudio = async () => {
-        console.log("audio Sent to Firebase", data.blob)
         // Some Cool Firebase Magic Goes Here
         // Firebase Storage
         const storageRef = firebase.storage().ref('VoiceMessages/' + data.blobURL.split("/")[3]);
@@ -72,7 +70,7 @@ function SoundRecorder({ setIsVoiceRecorder, isVoiceRecorder }) {
 
 
         await task.on('state_changed',
-            // Progress of the Current Upload
+            // Progress of the Current Upload 
             function progress(snapshot) {
                 let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 setProgressBarPercentage(percentage);

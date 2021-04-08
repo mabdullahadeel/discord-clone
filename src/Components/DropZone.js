@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './DropZone.css';
+import {v4 as uid} from 'uuid';
 
 // firebase
 import db from '../firebase/firebase';
@@ -64,7 +65,7 @@ function DropZone({ isDropZoneOpen, setIsDropZoneOpen }) {
         const file = files[0]
         // Some Cool Firebase Magic Goes Here
         // Firebase Storage
-        const storageRef = firebase.storage().ref('ImageMessages/' + "Image");
+        const storageRef = firebase.storage().ref('ImageMessages/' + "Image" + uid());
         if (file.size <= 300000) {
             const task = storageRef.put(file);
             await task.on('state_changed',
@@ -76,7 +77,7 @@ function DropZone({ isDropZoneOpen, setIsDropZoneOpen }) {
                 },
                 // Handling The Error
                 function error(err) {
-                    alert("Ooppps! Could not send the voice right now 😢. But you can always retry.")
+                    alert("Ooppps! Could not send right now 😢. But you can always retry.")
                 },
                 // Handling successful complete addition to firebase storage
                 await async function complete() {
@@ -116,7 +117,6 @@ function DropZone({ isDropZoneOpen, setIsDropZoneOpen }) {
         } else {
             setError("You can send max 500KB of image size.");
         }
-
     }
 
     return (

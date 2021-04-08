@@ -4,7 +4,7 @@ import SidebarChannel from './SidebarChannel';
 
 const ChannelList = React.forwardRef((props, ref) => (
     <FlipMove delay={300}>
-        {props.conversation.map(convers => (
+        {props.conversation?.map(convers => (
             <div key={convers.id}>
                 <SidebarChannel
                     key={convers.id}
